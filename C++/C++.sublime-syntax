@@ -119,8 +119,8 @@ contexts:
     # common C++ instance var naming idiom -- fMemberName
     - match: '\b(f|m)[[:upper:]]\w*\b'
       scope: variable.other.readwrite.member.c++
-    # common C++ instance var naming idiom -- m_member_name
-    - match: '\bm_[[:alnum:]_]+\b'
+    # common C++ instance var naming idiom -- g_global_name, s_static_name, m_member_name
+    - match: '\b(g|s|m)_[[:alnum:]_]+\b'
       scope: variable.other.readwrite.member.c++
 
   unique-constants:
