@@ -437,7 +437,7 @@ contexts:
           scope: meta.return-type.objc punctuation.definition.type.objc
           push:
             - meta_scope: meta.return-type.objc
-            - match: (\))\s*(\w+\b)
+            - match: (\))\s*
               captures:
                 1: punctuation.definition.type.objc
                 2: entity.name.function.objc
