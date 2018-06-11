@@ -332,6 +332,7 @@ contexts:
             2: punctuation.definition.storage.type.objc++
           pop: true
         - include: preprocessor-objc-structures
+        - include: preprocessor-expressions
         - include: objc-structure-body
     - match: '((@)(implementation))\s+([[:alpha:]_][[:alnum:]_]*)\s*(?::\s*([[:alpha:]][[:alnum:]]*))?'
       captures:
@@ -348,6 +349,7 @@ contexts:
             2: punctuation.definition.storage.type.objc++
           pop: true
         - include: preprocessor-objc-structures
+        - include: preprocessor-expressions
         - include: objc-structure-body
 
   objc-structure-body:
