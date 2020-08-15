@@ -618,6 +618,11 @@ contexts:
       push:
         - match: ^\s*endef\b
           pop: true
+    - include: comments
+    - include: control-flow
+    - include: highlight-percentage-sign
+    - include: variable-definitions
+    - include: variable-substitutions
 
   variable-sub-common:
     - match: ':'
