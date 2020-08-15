@@ -602,6 +602,11 @@ contexts:
       push:
         - match: ^\s*endef\b
           pop: 1
+    - include: comments
+    - include: control-flow
+    - include: highlight-percentage-sign
+    - include: variable-definitions
+    - include: variable-substitutions
 
   variable-substitution-common:
     - match: ':'
