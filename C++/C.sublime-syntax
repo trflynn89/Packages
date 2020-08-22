@@ -60,6 +60,7 @@ contexts:
   #############################################################################
 
   comments:
+    - include: scope:text.html.javadoc
     - match: ^/\* =(\s*.*?)\s*= \*/$\n?
       scope: comment.block.c
       captures:
