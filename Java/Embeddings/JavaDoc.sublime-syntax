@@ -117,7 +117,7 @@ contexts:
       set:
         - javadoc-block-tag-common
         - javadoc-block-tag-reference
-    - match: \@(uses|provides)\b
+    - match: \@(uses|provides|tparam)\b
       scope: meta.tag.block.javadoc entity.name.tag.documentation.javadoc
       set:
         - javadoc-block-tag-common
