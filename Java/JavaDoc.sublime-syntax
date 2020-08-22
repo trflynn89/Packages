@@ -73,6 +73,11 @@ contexts:
       captures:
         1: punctuation.definition.keyword.javadoc
       push: [javadoc-block-tag-base, reference]
+    - match: (@)tparam\b
+      scope: keyword.other.documentation.tparam.javadoc
+      captures:
+        1: punctuation.definition.keyword.javadoc
+      push: [javadoc-block-tag-base, reference]
     - match: (@)(uses|provides)\b
       scope: keyword.other.documentation.uses-or-provides.javadoc
       captures:
