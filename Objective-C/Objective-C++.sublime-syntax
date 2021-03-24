@@ -267,6 +267,7 @@ contexts:
 
   strings:
     - include: scope:source.objc#unique-strings
+    - include: scope:source.c++#format-strings
     - include: scope:source.c++#unique-strings
     - include: scope:source.c#strings
 
