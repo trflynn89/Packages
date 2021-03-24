@@ -33,7 +33,7 @@ variables:
   hex_exponent: '(?:[pP][-+]?{{dec_digit}}*)'
 
   # number suffixes
-  # note: nearly everything can be defined as suffix 
+  # note: nearly everything can be defined as suffix
   # a) see user literals
   #    https://en.cppreference.com/w/cpp/language/user_literal
   # b) see complex `operator` keyword
@@ -41,7 +41,7 @@ variables:
   bin_suffix: '[2-9a-zA-Z_][[:alnum:]_]*'
   oct_suffix: '[8-9g-zG-Z_][[:alnum:]_]*'
   dec_suffix: '[a-zA-Z_][[:alnum:]_]*'
-  hex_suffix: '[g-zG-Z_][[:alnum:]_]*'  
+  hex_suffix: '[g-zG-Z_][[:alnum:]_]*'
   float_suffix: '[fF]'
 
   identifier: \b[[:alpha:]_][[:alnum:]_]*\b # upper and lowercase
@@ -155,6 +155,42 @@ contexts:
         - match: '\)\3"'
           scope: punctuation.definition.string.end.c++
           pop: true
+
+  format-strings:
+    - match: '(L|u8|u|U)?(")'
+      captures:
+        1: storage.type.string.c++
+        2: punctuation.definition.string.begin.c++
+      push:
+        - meta_scope: string.quoted.double.c++
+        - match: '"'
+          scope: punctuation.definition.string.end.c++
+          pop: true
+        - include: scope:source.c#string_escaped_char
+        - include: scope:source.c#string_placeholder
+        - include: format-string-replacement
+
+  format-string-replacement:
+    # https://en.cppreference.com/w/cpp/utility/format/formatter#Standard_format_specification
+    - match: |-
+        (?x:\{
+          (?:\d+)?                # position
+          (:
+            (?:.? [<>^])?         # fill align
+            [ +-]?                # sign
+            \#?                   # alternate form
+            0?                    # zero-padding
+            (\d+|\{\d*\})?        # width (or nested replacement field)
+            (?:\.(\d+|\{\d*\})?)? # precision (or nested replacement field)
+            L?                    # locale-specific form
+            [cspbBodxXaAeEfFgG]?  # presentation type
+          )?
+        \})
+      scope: constant.other.placeholder.c++
+    - match: \{\{
+      scope: constant.other.placeholder.c++
+    - match: \}\}
+      scope: constant.other.placeholder.c++
 
   numbers:
     # https://en.cppreference.com/w/cpp/language/floating_literal
@@ -414,6 +450,7 @@ contexts:
 
   strings:
     - include: unique-strings
+    - include: format-strings
     - include: scope:source.c#strings
 
   ## C++-specific contexts
