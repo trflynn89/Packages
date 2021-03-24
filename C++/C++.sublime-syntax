@@ -162,6 +162,42 @@ contexts:
           scope: punctuation.definition.string.end.c++
           pop: true
 
+  format-strings:
+    - match: '(L|u8|u|U)?(")'
+      captures:
+        1: storage.type.string.c++
+        2: punctuation.definition.string.begin.c++
+      push:
+        - meta_scope: string.quoted.double.c++
+        - match: '"'
+          scope: punctuation.definition.string.end.c++
+          pop: true
+        - include: scope:source.c#string_escaped_char
+        - include: scope:source.c#string_placeholder
+        - include: format-string-replacement
+
+  format-string-replacement:
+    # https://en.cppreference.com/w/cpp/utility/format/formatter#Standard_format_specification
+    - match: |-
+        (?x:\{
+          (?:\d+)?                # position
+          (:
+            (?:.? [<>^])?         # fill align
+            [ +-]?                # sign
+            \#?                   # alternate form
+            0?                    # zero-padding
+            (\d+|\{\d*\})?        # width (or nested replacement field)
+            (?:\.(\d+|\{\d*\})?)? # precision (or nested replacement field)
+            L?                    # locale-specific form
+            [cspbBodxXaAeEfFgG]?  # presentation type
+          )?
+        \})
+      scope: constant.other.placeholder.c++
+    - match: \{\{
+      scope: constant.other.placeholder.c++
+    - match: \}\}
+      scope: constant.other.placeholder.c++
+
   numbers:
     # https://en.cppreference.com/w/cpp/language/floating_literal
 
@@ -470,6 +506,7 @@ contexts:
 
   strings:
     - include: unique-strings
+    - include: format-strings
     - include: scope:source.c#strings
 
   ## C++-specific contexts
