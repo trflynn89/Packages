@@ -61,7 +61,7 @@ variables:
   control_keywords: 'break|case|catch|continue|default|do|else|for|goto|if|_Pragma|switch|throw|try|while|{{coroutine_keywords}}'
   memory_operators: 'new|delete'
   basic_types: 'asm|__asm__|auto|bool|_Bool|char|_Complex|double|float|_Imaginary|int|long|short|signed|unsigned|void'
-  before_tag: 'struct|union|enum\s+class|enum\s+struct|enum|class'
+  before_tag: 'struct|union|enum\s+class|enum\s+struct|enum|class|concept'
   declspec: '__declspec\(\s*\w+(?:\([^)]+\))?\s*\)'
   storage_classes: 'static|export|extern|friend|explicit|virtual|register|thread_local'
   type_qualifier: 'const|mutable|typename|volatile'
@@ -308,6 +308,7 @@ contexts:
     - match: '(?=\btemplate\b)'
       push:
         - include: template
+        - include: constraint
         - match: (?=\S)
           set: global-modifier
     - include: using-namespace
@@ -796,6 +797,13 @@ contexts:
             - match: \b({{before_tag}})\b
               scope: keyword.declaration.c++
             - include: template-common
+
+  constraint:
+    - match: \b(requires)\b
+      scope: keyword.declaration.constraint.c++
+      push:
+        - meta_scope: meta.constraint.c++
+        - include: template-common
 
   generic-type:
     - match: '(?=(?!template){{path_lookahead}}\s*{{generic_lookahead}}\s*(\(|\{))'
@@ -1341,6 +1349,8 @@ contexts:
     - match: '\bunion\b'
       scope: keyword.declaration.union.type.c++
       set: data-structures-union-definition
+    - match: '\bconcept\b'
+      scope: keyword.declaration.concept.type.c++
     - match: '(?=\S)'
       pop: true
 
