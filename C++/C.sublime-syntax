@@ -32,7 +32,7 @@ variables:
   double_suffix: 'df|DF|dd|DD|dl|DL|[fFlL]'
   integer_suffix: 'u?wb|[lL]{1,2}[uU]?|[uU][lL]{0,2}'
 
-  identifier: \b[[:alpha:]_][[:alnum:]_]*\b # upper and lowercase
+  identifier: \b[[:alpha:]_][[:alnum:]_\$]*\b # upper and lowercase
   macro_identifier: \b[[:upper:]_][[:upper:][:digit:]_]{2,}\b # only uppercase, at least 3 chars
   control_keywords: 'break|case|continue|default|do|else|for|goto|if|_Pragma|return|switch|while'
   basic_types: 'asm|__asm__|auto|bool|_Bool|char|_Complex|double|float|_Imaginary|_Decimal(32|64|128)|int|long|short|signed|unsigned|void'

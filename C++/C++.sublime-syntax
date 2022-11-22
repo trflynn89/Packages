@@ -51,7 +51,7 @@ variables:
   hex_suffix: '[g-zG-Z_][[:alnum:]_]*'
   float_suffix: '[fF]'
 
-  identifier: \b[[:alpha:]_][[:alnum:]_]*\b # upper and lowercase
+  identifier: \b[[:alpha:]_][[:alnum:]_\$]*\b # upper and lowercase
   macro_identifier: \b[[:upper:]_][[:upper:][:digit:]_]{2,}\b # only uppercase, at least 3 chars
   path_lookahead: '(?:::\s*)?(?:{{identifier}}\s*::\s*)*(?:template\s+)?{{identifier}}'
   operator_method_name: '\boperator\s*(?:[-+*/%^&|~!=<>]|[-+*/%^&|=!<>]=|<=>|<<=?|>>=?|&&|\|\||\+\+|--|,|->\*?|\(\)|\[\]|""\s*{{identifier}})'
