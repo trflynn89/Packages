@@ -75,6 +75,7 @@ contexts:
   #############################################################################
 
   comments:
+    - include: scope:text.html.javadoc
     - include: block-comments
     - include: line-comments
 
