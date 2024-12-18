@@ -280,6 +280,7 @@ contexts:
     - include: keywords-angle-brackets
     - match: '(?={{path_lookahead}}\s*<)'
       push: global-modifier
+    - include: scope:text.html.javadoc
     - include: global-block-comments
     - include: early-expressions
     - match: ^\s*\b(extern)(?=\s+"C(\+\+)?")
